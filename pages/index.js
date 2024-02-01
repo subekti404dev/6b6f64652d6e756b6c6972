@@ -21,8 +21,9 @@ const Index = () => {
             {key}
           </div>}
           <div tw="text-center cursor[pointer] m-4 p-2 border[1px solid yellow] color[yellow] border-radius[0.5rem] text-lg font-semibold" onClick={getRandomLink}>Random</div>
-
-        </div>
+          <div tw="text-center text-xs mt-4">How to Encrypt:</div>
+          <div tw="text-center text-xs">Tanya Mang Wahyu 😂</div>
+        </div> 
       </div>
     </>
   );
