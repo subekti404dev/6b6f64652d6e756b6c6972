@@ -13,7 +13,7 @@ const Index = () => {
     <>
 
       <div tw="flex flex-col justify-center items-center h-full w-full pt-10">
-        <div tw="width[25rem] justify-center items-center">
+        <div tw="width[24rem] justify-center items-center">
           {url && <div tw="background-color[#3a3a3a] m-4 p-4 border-radius[0.5rem] word-wrap[break-word]">
             {url}
           </div>}
