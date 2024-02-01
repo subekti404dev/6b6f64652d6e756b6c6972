@@ -6,8 +6,8 @@ import { useEffect } from "react";
 const Index = () => {
   const { setTheme } = useTheme();
   useEffect(() => {
-    setTheme('dark')
-  })
+    setTheme("dark");
+  });
   const { url, getRandomLink, key } = useCrot();
   return (
     <>
