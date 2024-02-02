@@ -1,6 +1,6 @@
 import Axios from "axios"
 
-const queries = ["cantik", "hijab", "toket", "toge"]
+const queries = ["cantik", "hijab", "toket", "toge", "chindo"]
 const caches = []
 
 const CrotService = {
