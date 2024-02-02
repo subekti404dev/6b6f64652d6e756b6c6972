@@ -23,7 +23,7 @@ const Index = () => {
                   tw="flex justify-center items-center"
                   onClick={async () => {
                     await navigator.clipboard.writeText(url);
-                    alert('copied')
+                    alert("copied");
                   }}
                 >
                   <img src="copy.png" tw="width[18px]" />
