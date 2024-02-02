@@ -17,7 +17,7 @@ export const useCrot = () => {
     try {
       setUrl()
       setLoading(true)
-      const resp = await Axios.get(`https://crot-bareng.vercel.app/v1/crot/random`)
+      const resp = await Axios.get(`/api/crot`)
       if (resp.data?.data) {
         setUrl(resp.data.data)
       }
