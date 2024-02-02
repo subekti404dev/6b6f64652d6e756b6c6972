@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { useCrot } from "../hooks/useCrot";
 import { useEffect } from "react";
 import { BallTriangle } from "react-loader-spinner";
+import { Toaster, toast } from "react-hot-toast"
 
 const Index = () => {
   const { setTheme } = useTheme();
@@ -12,7 +13,7 @@ const Index = () => {
   const { url, getRandomLink, key, loading } = useCrot();
   return (
     <>
-
+      <Toaster position="bottom-center" />
       <div tw="flex flex-col justify-center items-center h-full w-full pt-10">
         {!loading && (
           <div tw="width[23rem] justify-center items-center">
@@ -23,16 +24,30 @@ const Index = () => {
                   tw="flex justify-center items-center"
                   onClick={async () => {
                     await navigator.clipboard.writeText(url);
-                    alert("copied");
+                    toast.success("copied");
                   }}
                 >
                   <img src="copy.png" tw="width[18px]" />
                 </button>
               </div>
             </div>}
-            {url && key && <div tw="text-center background-color[#3a3a3a] m-4 p-1 border-radius[0.5rem] word-wrap[break-word] font-family[monospace]">
-              {key}
-            </div>}
+            {url && key && (
+              <div
+                tw="text-center background-color[#3a3a3a] m-4 p-1 border-radius[0.5rem] word-wrap[break-word] font-family[monospace]">
+                <div tw="flex flex-row">
+                  <div tw="width[90%]"> {key}</div>
+                  <button
+                    tw="flex justify-center items-center"
+                    onClick={async () => {
+                      await navigator.clipboard.writeText(key);
+                      toast.success("copied");
+                    }}
+                  >
+                    <img src="copy.png" tw="width[18px]" />
+                  </button>
+                </div>
+              </div>
+            )}
             <div tw="text-center cursor[pointer] m-4 p-2 border[2px solid #ea8f1d] color[#ea8f1d] border-radius[0.5rem] text-lg font-semibold" onClick={getRandomLink}>Random</div>
             <div tw="text-center text-xs mt-8">How to Decrypt:</div>
             <div tw="text-center text-xs">Tanya Mang Wahyu 😂</div>

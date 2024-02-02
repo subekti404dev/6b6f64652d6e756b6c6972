@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Axios from 'axios'
 
-
 export const useCrot = () => {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -10,14 +9,13 @@ export const useCrot = () => {
 
   useEffect(() => {
     getRandomLink();
-
   }, [])
 
   const getRandomLink = async () => {
     try {
       setUrl()
       setLoading(true)
-      const resp = await Axios.get(`/api/crot`)
+      const resp = await Axios.get(`/api/crot?key=${key}`)
       if (resp.data?.data) {
         setUrl(resp.data.data)
       }
