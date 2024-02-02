@@ -4,6 +4,7 @@ import Axios from 'axios'
 
 export const useCrot = () => {
   const [url, setUrl] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const key = 'bagiBwang';
 
@@ -13,13 +14,19 @@ export const useCrot = () => {
   }, [])
 
   const getRandomLink = async () => {
-    setUrl()
-    const resp = await Axios.get(`https://crot-bareng.vercel.app/v1/crot/random`)
-    if (resp.data?.data) {
-      setUrl(resp.data.data)
+    try {
+      setUrl()
+      setLoading(true)
+      const resp = await Axios.get(`https://crot-bareng.vercel.app/v1/crot/random`)
+      if (resp.data?.data) {
+        setUrl(resp.data.data)
+      }
+      setLoading(false)
+    } catch (e) {
+      setLoading(false)
+      console.log(e);
     }
-
   }
 
-  return { url, getRandomLink, key }
+  return { url, getRandomLink, key, loading }
 }
