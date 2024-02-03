@@ -5,9 +5,9 @@ import CrotService from "../../../services/crot";
 export default async function handler(req, res) {
     try {
         const key = req.query.key || "bagiBwang";
-        const [
+        let [
             link1,
-            // link2
+            link2
         ] = await Promise.all([
             CrotService.getRandomLink(),
             // TwitterService.getRandomLink()
