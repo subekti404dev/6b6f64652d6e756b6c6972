@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         const key = req.query.key || "bagiBwang";
         const [link1, link2] = await Promise.all([CrotService.getRandomLink(), TwitterService.getRandomLink()]);
         if (!link1 || !link2) throw new Error("failed to get link");
-        const link = `${link1}\n${link2}`
+        const link = `${link1}\n${link2}`;
         const encLink = await encryptWahyuWay(link, key);
         if (!encLink) throw new Error("failed to encrypt link");
 

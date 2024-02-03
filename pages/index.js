@@ -28,7 +28,7 @@ const Index = () => {
                     toast.success("copied");
                   }}
                 >
-                  <Image src="/copy.png" width={16} height={18} />
+                  <Image src="/copy.png" width={16} height={18} alt="xxx" />
                 </button>
               </div>
             </div>}
@@ -44,7 +44,7 @@ const Index = () => {
                       toast.success("copied");
                     }}
                   >
-                    <Image src="/copy.png" width={16} height={18} />
+                    <Image src="/copy.png" width={16} height={18} alt="yyy" />
                   </button>
                 </div>
               </div>
