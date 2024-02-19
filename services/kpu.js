@@ -56,15 +56,15 @@ const KPUService = {
         (await Promise.all(promiseTps)).map((res, i) => {
             tps = [...tps, ...(res || [])]
         });
-        for (const t of tps) {
-           if (t.code) promiseTpsDetails.push(KPUService.getTpsDetail(t.kode));
-        }
-        const tpsDetails = (await Promise.all(tps.map(t => KPUService.getTpsDetail(t.kode))))
+        // for (const t of tps) {
+        //    if (t.code) promiseTpsDetails.push(KPUService.getTpsDetail(t.kode));
+        // }
+        // const tpsDetails = (await Promise.all(tps.map(t => KPUService.getTpsDetail(t.kode))))
         return { 
             districts,
             subdistricts,
             tps, 
-            tpsDetails
+            // tpsDetails
          };
     }
 }
