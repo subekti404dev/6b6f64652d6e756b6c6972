@@ -34,13 +34,14 @@ const KPUService = {
     getTpsOnCities: async (cityId) => {
         const arr = cityId.split('');
         const provinceId = arr[0] + arr[1];
-        // console.log(provinceId);
         let tps = [];
         const districts = await KPUService.getDistrict(provinceId, cityId);
         let subdistricts = []
 
         const promisesSubDistrict = [];
         const promiseTps = [];
+        const promiseTpsDetails = [];
+
 
         for (const d of districts) {
             promisesSubDistrict.push(KPUService.getSubDistrict(provinceId, cityId, d.kode))
@@ -55,13 +56,17 @@ const KPUService = {
         (await Promise.all(promiseTps)).map((res, i) => {
             tps = [...tps, ...(res || [])]
         });
-        // const tpsDetails = (await Promise.all(tps.map(t => KPUService.getTpsDetail(t.kode))))
-        return { districts, subdistricts, tps, 
-            // tpsDetails
+        for (const t of tps) {
+           if (t.code) promiseTpsDetails.push(KPUService.getTpsDetail(t.kode));
+        }
+        const tpsDetails = (await Promise.all(tps.map(t => KPUService.getTpsDetail(t.kode))))
+        return { 
+            districts,
+            subdistricts,
+            tps, 
+            tpsDetails
          };
     }
 }
 
 export default KPUService;
-
-KPUService.getTpsOnCities('3309').then(console.log)
