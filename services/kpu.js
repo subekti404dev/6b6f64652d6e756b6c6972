@@ -32,8 +32,11 @@ const KPUService = {
         return res.data;
     },
     getTpsOnCities: async (cityId) => {
-        const arr = cityId.split('');
-        const provinceId = arr[0] + arr[1];
+        const provinceId = cityId.slice(0, 2);
+        const [provinces, cities] = await Promise.all([KPUService.getProvinces(), KPUService.getCities(provinceId)]);
+
+        const province = provinces?.find(p => p.kode === provinceId);
+        const city = cities?.find(c => c.kode === cityId);
         let tps = [];
         const districts = await KPUService.getDistrict(provinceId, cityId);
         let subdistricts = []
@@ -56,16 +59,40 @@ const KPUService = {
         (await Promise.all(promiseTps)).map((res, i) => {
             tps = [...tps, ...(res || [])]
         });
-        // for (const t of tps) {
-        //    if (t.code) promiseTpsDetails.push(KPUService.getTpsDetail(t.kode));
-        // }
-        // const tpsDetails = (await Promise.all(tps.map(t => KPUService.getTpsDetail(t.kode))))
-        return { 
-            districts,
-            subdistricts,
-            tps, 
-            // tpsDetails
-         };
+        const result = tps.map((t) => {
+            const cityId = t.kode?.slice(0, 4);
+            const districtId = t.kode?.slice(0, 6);
+            const district = districts?.find(d => d.kode === districtId)
+            const subDistrictId = t.kode?.slice(0, 10);
+            const subDistrict = subdistricts?.find(d => d.kode === subDistrictId)
+            return {
+                id: t.id,
+                name: t.nama,
+                code: t.kode,
+                subDistrict: {
+                    id: subDistrict.id,
+                    name: subDistrict.nama,
+                    code: subDistrict.kode
+                },
+                district: {
+                    id: district.id,
+                    name: district.nama,
+                    code: district.kode
+                },
+                city: {
+                    id: city.id,
+                    name: city.nama,
+                    code: city.kode
+                },
+                province: {
+                    id: province.id,
+                    name: province.nama,
+                    code: province.kode
+                },
+            }
+        })
+
+        return result;
     }
 }
 
